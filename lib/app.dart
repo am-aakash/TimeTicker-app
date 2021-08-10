@@ -5,12 +5,13 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: Colors.white70,
-        accentColor: Colors.blueGrey[900],
+        primaryColor: Colors.black,
+        // accentColor: Colors.deepPurple,
         brightness: Brightness.dark,
       ),
-      title: 'Flutter Timer',
+      title: 'Timer',
       home: TimerPage(),
     );
   }
