@@ -6,8 +6,7 @@ class TimerText extends StatelessWidget {
   const TimerText({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final duration =
-        23; //context.select((TimerBloc bloc) => bloc.state.duration);
+    final duration = context.select((TimerBloc bloc) => bloc.state.duration);
     final minutesStr =
         ((duration / 60) % 60).floor().toString().padLeft(2, '0');
     final secondsStr = (duration % 60).floor().toString().padLeft(2, '0');
