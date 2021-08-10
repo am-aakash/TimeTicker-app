@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_timer/screens/timer_screen.dart';
 
 class App extends StatelessWidget {
   @override
@@ -10,7 +11,7 @@ class App extends StatelessWidget {
         brightness: Brightness.dark,
       ),
       title: 'Flutter Timer',
-      //home: const TimerPage(),
+      home: TimerPage(),
     );
   }
 }
