@@ -43,6 +43,37 @@ class TimerView extends StatelessWidget {
   }
 }
 
+class TimerText extends StatelessWidget {
+  const TimerText({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    final duration = context.select((TimerBloc bloc) => bloc.state.duration);
+    print(duration);
+    //final minutesStr = ((duration / 60) % 60).floor().toString().padLeft(2, '0');
+    final secondsStr = duration;
+    //(duration % 60).floor().toString().padLeft(2, '0');
+    return Text(
+      '$secondsStr s',
+      style: Theme.of(context).textTheme.headline1,
+    );
+  }
+}
+
+/*
+The Actions widget is just another StatelessWidget which uses a BlocBuilder to rebuild the UI every time we get a new TimerState. 
+Actions uses context.read<TimerBloc>() to access the TimerBloc instance 
+and returns different FloatingActionButtons based on the current state of the TimerBloc. 
+Each of the FloatingActionButtons adds an event in its onPressed callback to notify the TimerBloc.
+
+If you want fine-grained control over when the builder function is called you can provide an optional buildWhen to BlocBuilder. 
+The buildWhen takes the previous bloc state and current bloc state and returns a boolean. 
+If buildWhen returns true, builder will be called with state and the widget will rebuild. 
+If buildWhen returns false, builder will not be called with state and no rebuild will occur.
+In this case, we don’t want the Actions widget to be rebuilt on every tick because that would be inefficient. 
+Instead, we only want Actions to rebuild if the runtimeType of the TimerState changes 
+(TimerInitial => TimerRunInProgress, TimerRunInProgress => TimerRunPause, etc...).
+*/
+
 class Actions extends StatelessWidget {
   const Actions({Key? key}) : super(key: key);
   @override
@@ -86,7 +117,7 @@ class Actions extends StatelessWidget {
                 child: Icon(Icons.replay),
                 onPressed: () => context.read<TimerBloc>().add(TimerReset()),
               ),
-            ]
+            ],
           ],
         );
       },
